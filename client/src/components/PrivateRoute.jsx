@@ -16,8 +16,12 @@ import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function PrivateRoute({ children }) {
   const location = useLocation();
+  const {user}  = useAuth()
 
   // TODO: replace this passthrough — right now EVERY page renders,
   //       even when nobody is logged in.
+  if(!user){
+    return <Navigate to ='/login' replace state={{from: location}}/>
+  }
   return children;
 }
