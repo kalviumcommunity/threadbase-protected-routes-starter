@@ -19,5 +19,13 @@ export default function PrivateRoute({ children }) {
 
   // TODO: replace this passthrough — right now EVERY page renders,
   //       even when nobody is logged in.
+  const { user } = useAuth();
+
+  // Redirect unauthenticated users to the login page
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
+
+  // Render the protected page when the user is logged in
   return children;
 }
