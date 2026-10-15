@@ -11,6 +11,11 @@
 import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function RoleGate({ requiredRole, children }) {
-  // TODO: replace this passthrough with a real role check.
+  const { user } = useAuth();
+
+  if (user?.role !== requiredRole) {
+    return null;
+  }
+
   return children;
 }
