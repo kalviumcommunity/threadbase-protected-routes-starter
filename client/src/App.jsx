@@ -10,7 +10,7 @@
 // ────────────────────────────────────────────────────────────
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
-import PrivateRoute from "./components/PrivateRoute.jsx";
+import { PrivateRoute } from "./components/PrivateRoute.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ThreadsPage from "./pages/ThreadsPage.jsx";
@@ -30,9 +30,9 @@ export default function App() {
         <Route path="/threads" element={<ThreadsPage />} />
 
         {/* TODO (task 2): protect these three with <PrivateRoute> */}
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/threads/new" element={<NewThreadPage />} />
+        <Route path="/dashboard" element={<PrivateRoute><DashboardPage /></PrivateRoute>} />
+        <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+        <Route path="/threads/new" element={<PrivateRoute><NewThreadPage /></PrivateRoute>} />
       </Routes>
     </div>
   );
