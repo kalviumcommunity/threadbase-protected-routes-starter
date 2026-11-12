@@ -1,11 +1,6 @@
 // App.jsx — the router config.
 // ────────────────────────────────────────────────────────────
-// TASK 2: three routes below are meant to be private, but right now they
-// render for ANYONE. Wrap each protected element in <PrivateRoute> once you
-// have built it, e.g.:
-//     <Route path="/dashboard" element={
-//       <PrivateRoute><DashboardPage /></PrivateRoute>
-//     } />
+// The dashboard, profile and new-thread pages require authentication.
 // Leave "/", "/login" and "/threads" public.
 // ────────────────────────────────────────────────────────────
 import { Routes, Route } from "react-router-dom";
@@ -29,10 +24,18 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/threads" element={<ThreadsPage />} />
 
-        {/* TODO (task 2): protect these three with <PrivateRoute> */}
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/threads/new" element={<NewThreadPage />} />
+        <Route
+          path="/dashboard"
+          element={<PrivateRoute><DashboardPage /></PrivateRoute>}
+        />
+        <Route
+          path="/profile"
+          element={<PrivateRoute><ProfilePage /></PrivateRoute>}
+        />
+        <Route
+          path="/threads/new"
+          element={<PrivateRoute><NewThreadPage /></PrivateRoute>}
+        />
       </Routes>
     </div>
   );
