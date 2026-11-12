@@ -13,8 +13,7 @@ import { useAuth } from "../auth/AuthContext.jsx";
 export default function ThreadItem({ thread }) {
   const { user } = useAuth();
 
-  // TODO: replace this with a real ownership (+ admin) check.
-  const canEdit = true;
+  const canEdit = user?.userId === thread.authorId || user?.role === "admin";
 
   return (
     <article className="thread">
