@@ -14,7 +14,9 @@ export default function ThreadItem({ thread }) {
   const { user } = useAuth();
 
   // TODO: replace this with a real ownership (+ admin) check.
-  const canEdit = true;
+  const isAuthor=user?.userId===thread.authorId;
+  const isAdmin=user?.role==="admin";
+  const canEdit=isAdmin||isAuthor;
 
   return (
     <article className="thread">
