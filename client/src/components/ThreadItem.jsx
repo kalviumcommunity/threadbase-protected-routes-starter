@@ -8,19 +8,24 @@
 // Right now `canEdit` is hard-coded to true, so the controls show for EVERYONE
 // (even logged-out visitors). Fix that.
 // ────────────────────────────────────────────────────────────
+
+  // TODO: replace this with a real ownership (+ admin) check.
+// components/ThreadItem.jsx
 import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function ThreadItem({ thread }) {
   const { user } = useAuth();
 
-  // TODO: replace this with a real ownership (+ admin) check.
-  const canEdit = true;
+  const isAuthor = user?.userId === thread.authorId;
+  const isAdmin = user?.role === "admin";
+  const canEdit = isAuthor || isAdmin;
 
   return (
     <article className="thread">
       <h3>{thread.title}</h3>
       <p>{thread.body}</p>
       <p className="byline">by {thread.authorName}</p>
+
       {canEdit && (
         <div className="controls">
           <button>Edit</button>

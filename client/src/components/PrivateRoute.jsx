@@ -11,13 +11,17 @@
 // Then TASK 2: wrap /dashboard, /profile and /threads/new with <PrivateRoute>
 // in App.jsx. The full walkthrough is in the lesson.
 // ────────────────────────────────────────────────────────────
+
+  // TODO: replace this passthrough — right now EVERY page renders,
+  //       even when nobody is logged in.
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 
 export default function PrivateRoute({ children }) {
   const location = useLocation();
-
-  // TODO: replace this passthrough — right now EVERY page renders,
-  //       even when nobody is logged in.
+  const { user } = useAuth();
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location }} />;
+  }
   return children;
 }
